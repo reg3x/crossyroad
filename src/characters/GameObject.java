@@ -32,12 +32,20 @@ public class GameObject {
         rect = label.getBounds();
     }
 
-    public JLabel getEtiqueta() {
+    public JLabel getLabel() {
         return label;
     }
 
-    public ImageIcon getIcono() {
+    public ImageIcon getIcon() {
         return icon;
+    }
+
+    public int getxInit() {
+        return xInit;
+    }
+
+    public int getyInit() {
+        return yInit;
     }
 
     public URL getUrl() {
@@ -53,11 +61,4 @@ public class GameObject {
         return rect;
     }
 
-    public int getxInicial() {
-        return xInit;
-    }
-
-    public int getyInicial() {
-        return yInit;
-    }
 }

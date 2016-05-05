@@ -10,9 +10,10 @@ package characters;
  * @author reg3x
  */
 public class Vehicle extends GameObject {
-    
-    public Vehicle(String urlstring, int xInicial, int yInicial) {
-        super(urlstring, xInicial, yInicial);
+
+    public Vehicle(String urlstring, int xInit, int yInit) {
+        super(urlstring, xInit, yInit);
     }
+
     
 }

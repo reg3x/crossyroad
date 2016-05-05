@@ -13,9 +13,11 @@ public class Player extends GameObject{
     
     private int points;
     private int lifes;
-    
-    public Player(String urlstring, int xInicial, int yInicial) {
-        super(urlstring, xInicial, yInicial);
+
+    public Player(String urlstring, int xInit, int yInit) {
+        super(urlstring, xInit, yInit);
     }
+    
+   
     
 }
