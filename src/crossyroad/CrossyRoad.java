@@ -5,6 +5,9 @@
  */
 package crossyroad;
 
+import characters.Map;
+import characters.Player;
+import characters.Vehicle;
 import java.awt.Color;
 import java.awt.Image;
 import java.awt.Rectangle;
@@ -12,6 +15,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -25,9 +29,14 @@ import javax.swing.Timer;
 public class CrossyRoad {
 
     private JFrame myFrame;
+    private Player player;
+    private Map map;
+    private ArrayList<Vehicle> vehicles;
+    
     private Image imagen;
     private JLabel mapa,pollo,carro,camion,ambulancia,limo;        
     Timer timerCarro,timerAmbulancia,timerCamion,timerLimo;
+    
     
     public void iniciar(){
         JFrame myFrame = new JFrame("Crossy Road 0.1");   

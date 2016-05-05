@@ -9,6 +9,10 @@ package characters;
  *
  * @author reg3x
  */
-public class Map {
+public class Map extends GameObject{
+    
+    public Map(String urlstring, int xInicial, int yInicial) {
+        super(urlstring, xInicial, yInicial);
+    }
     
 }

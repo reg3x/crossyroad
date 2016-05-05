@@ -9,6 +9,13 @@ package characters;
  *
  * @author reg3x
  */
-public class Player {
+public class Player extends GameObject{
+    
+    private int points;
+    private int lifes;
+    
+    public Player(String urlstring, int xInicial, int yInicial) {
+        super(urlstring, xInicial, yInicial);
+    }
     
 }

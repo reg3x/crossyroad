@@ -15,29 +15,29 @@ import javax.swing.JLabel;
  * @author reg3x
  */
 public class GameObject {
-    private JLabel etiqueta;
-    private ImageIcon icono;
+    private JLabel label;
+    private ImageIcon icon;
     private URL url;
     private Rectangle rect;
-    private int xInicial, yInicial;
+    private int xInit, yInit;
     
-    public GameObject(String urlstring, int xInicial, int yInicial) {
+    public GameObject(String urlstring, int xInit, int yInit) {
         url = this.getClass().getResource(urlstring);
         System.out.println(url);
-        icono = new ImageIcon(url);
-        etiqueta = new JLabel(icono);
-        this.xInicial = xInicial;
-        this.yInicial = yInicial;
-        etiqueta.setBounds(xInicial, yInicial, icono.getIconWidth(), icono.getIconHeight());
-        rect = etiqueta.getBounds();
+        icon = new ImageIcon(url);
+        label = new JLabel(icon);
+        this.xInit = xInit;
+        this.yInit = yInit;
+        label.setBounds(xInit, yInit, icon.getIconWidth(), icon.getIconHeight());
+        rect = label.getBounds();
     }
 
     public JLabel getEtiqueta() {
-        return etiqueta;
+        return label;
     }
 
     public ImageIcon getIcono() {
-        return icono;
+        return icon;
     }
 
     public URL getUrl() {
@@ -49,15 +49,15 @@ public class GameObject {
     }
     
     public Rectangle getRectangle(){
-        rect = etiqueta.getBounds();
+        rect = label.getBounds();
         return rect;
     }
 
     public int getxInicial() {
-        return xInicial;
+        return xInit;
     }
 
     public int getyInicial() {
-        return yInicial;
+        return yInit;
     }
 }
