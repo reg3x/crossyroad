@@ -5,19 +5,19 @@
  */
 package characters;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author reg3x
+ * Esta Clase describe al Jugador
  */
-public class Player extends GameObject{
+public class Player {
     
     private int points;
+    private int coins;
     private int lifes;
-
-    public Player(String urlstring, int xInit, int yInit) {
-        super(urlstring, xInit, yInit);
-    }
-    
-   
+    private Mascot selectedMascot;
+    private ArrayList<Mascot> storedMascots;
     
 }
