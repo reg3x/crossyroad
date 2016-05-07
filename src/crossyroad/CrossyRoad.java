@@ -55,7 +55,8 @@ public class CrossyRoad {
 //        pollo = new JLabel(icon);
 //        pollo.setBounds(360, 700, icon.getIconWidth(), icon.getIconHeight());
 //        myFrame.add(pollo);
-        
+    
+        vehicles = new ArrayList<Vehicle>();
         vehicles.add(new Vehicle("carro.png",0, 590));
         vehicles.add(new Vehicle("camion.png",650, 555));
         vehicles.add(new Vehicle("ambulancia.png",0, 500));
