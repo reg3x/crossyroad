@@ -46,121 +46,133 @@ public class CrossyRoad {
         myFrame.setLocationRelativeTo(null); // center frame on monitor
         myFrame.setResizable(false);
 
-        ImageLoader loader = ImageLoader.getInstance();
-        ImageIcon icon;
+//        ImageLoader loader = ImageLoader.getInstance();
+//        ImageIcon icon;
+        player = new Player("pollo.png", 360, 700);
+        myFrame.add(player.getLabel());
+
+//        icon = loader.getImage(ImageLoader.POLLO);
+//        pollo = new JLabel(icon);
+//        pollo.setBounds(360, 700, icon.getIconWidth(), icon.getIconHeight());
+//        myFrame.add(pollo);
         
-        icon = loader.getImage(ImageLoader.POLLO);
-        pollo = new JLabel(icon);
-        pollo.setBounds(360, 700, icon.getIconWidth(), icon.getIconHeight());
-        myFrame.add(pollo);
+        vehicles.add(new Vehicle("carro.png",0, 590));
+        vehicles.add(new Vehicle("camion.png",650, 555));
+        vehicles.add(new Vehicle("ambulancia.png",0, 500));
+        vehicles.add(new Vehicle("limo.png",650, 340));
+        map = new Map("mapa.png",0, 0);
         
-        icon = loader.getImage(ImageLoader.CARRO);
-        carro = new JLabel(icon);
-        carro.setBounds(0, 590, icon.getIconWidth(), icon.getIconHeight());
-        myFrame.add(carro);
+        for(Vehicle vehicle: vehicles){
+            myFrame.add(vehicle.getLabel());
+        }
+        myFrame.add(map.getLabel());
+//        icon = loader.getImage(ImageLoader.CARRO);
+//        carro = new JLabel(icon);
+//        carro.setBounds(0, 590, icon.getIconWidth(), icon.getIconHeight());
+//        myFrame.add(carro);
         
-        icon = loader.getImage(ImageLoader.CAMION);
-        camion = new JLabel(icon);
-        camion.setBounds(650, 555, icon.getIconWidth(), icon.getIconHeight());
-        myFrame.add(camion);
-        
-        icon = loader.getImage(ImageLoader.AMBULANCIA);
-        ambulancia = new JLabel(icon);
-        ambulancia.setBounds(0, 500, icon.getIconWidth(), icon.getIconHeight());
-        myFrame.add(ambulancia);
-        
-        icon = loader.getImage(ImageLoader.LIMO);
-        limo = new JLabel(icon);
-        limo.setBounds(650, 340, icon.getIconWidth(), icon.getIconHeight());
-        myFrame.add(limo);
+//        icon = loader.getImage(ImageLoader.CAMION);
+//        camion = new JLabel(icon);
+//        camion.setBounds(650, 555, icon.getIconWidth(), icon.getIconHeight());
+//        myFrame.add(camion);
+//        
+//        icon = loader.getImage(ImageLoader.AMBULANCIA);
+//        ambulancia = new JLabel(icon);
+//        ambulancia.setBounds(0, 500, icon.getIconWidth(), icon.getIconHeight());
+//        myFrame.add(ambulancia);
+//        
+//        icon = loader.getImage(ImageLoader.LIMO);
+//        limo = new JLabel(icon);
+//        limo.setBounds(650, 340, icon.getIconWidth(), icon.getIconHeight());
+//        myFrame.add(limo);
                 
-        icon = loader.getImage(ImageLoader.MAPA);
-        mapa = new JLabel(icon);
-        mapa.setBounds(0,0, icon.getIconWidth(), icon.getIconHeight());
-        myFrame.add(mapa);
+//        icon = loader.getImage(ImageLoader.MAPA);
+//        mapa = new JLabel(icon);
+//        mapa.setBounds(0,0, icon.getIconWidth(), icon.getIconHeight());
+//        myFrame.add(mapa);
         
         myFrame.setVisible(true);
         
-        myFrame.addKeyListener(new KeyAdapter(){
-            @Override
-            public void keyPressed(KeyEvent e) {
-                
-                switch(e.getKeyCode()){
-                    case KeyEvent.VK_UP:
-                        pollo.setLocation(pollo.getX(), pollo.getY()-10);
-                        break;
-                    case KeyEvent.VK_DOWN:
-                        pollo.setLocation(pollo.getX(), pollo.getY()+10);
-                        break;
-                    case KeyEvent.VK_LEFT:
-                        pollo.setLocation(pollo.getX()-10, pollo.getY());
-                        break;
-                    case KeyEvent.VK_RIGHT:
-                        pollo.setLocation(pollo.getX()+10, pollo.getY());
-                        break;
-                }
-                System.out.println("Key: "+e.getKeyCode());
-            }
-        });
-        
-        timerCarro = new Timer(5, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                
-                if(carro.getX()<728){
-                    carro.setLocation(carro.getX()+1, carro.getY());
-                }else{
-                    carro.setLocation(0,590);
-                }
-                if(chequearColision()){
-                    colision();
-                }
-                
-                if(limo.getX()>0){
-                    limo.setLocation(limo.getX()-1, limo.getY());
-                }else{
-                    limo.setLocation(650, 340);
-                }
-                
-                
-                if(chequearColision()){
-                    colision();
-                }
-                
-            }
-        });
-        
-        timerAmbulancia = new Timer(4, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if(ambulancia.getX()<728){
-                    ambulancia.setLocation(ambulancia.getX()+1, ambulancia.getY());
-                }else{
-                    ambulancia.setLocation(0, 500);
-                }
-                if(chequearColision()){
-                    colision();
-                }
-            }
-        });
-        
-        timerCamion = new Timer(7, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if(camion.getX()>0){
-                    camion.setLocation(camion.getX()-1, camion.getY());
-                }else{
-                    camion.setLocation(650, 555);
-                }
-                if(chequearColision()){
-                    colision();
-                }
-            }
-        });
-        
-        timerCarro.start();
-        timerAmbulancia.start();
-        timerCamion.start();
+//        myFrame.addKeyListener(new KeyAdapter(){
+//            @Override
+//            public void keyPressed(KeyEvent e) {
+//                
+//                switch(e.getKeyCode()){
+//                    case KeyEvent.VK_UP:
+//                        pollo.setLocation(pollo.getX(), pollo.getY()-10);
+//                        break;
+//                    case KeyEvent.VK_DOWN:
+//                        pollo.setLocation(pollo.getX(), pollo.getY()+10);
+//                        break;
+//                    case KeyEvent.VK_LEFT:
+//                        pollo.setLocation(pollo.getX()-10, pollo.getY());
+//                        break;
+//                    case KeyEvent.VK_RIGHT:
+//                        pollo.setLocation(pollo.getX()+10, pollo.getY());
+//                        break;
+//                }
+//                System.out.println("Key: "+e.getKeyCode());
+//            }
+//        });
+//        
+//        timerCarro = new Timer(5, new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                
+//                if(carro.getX()<728){
+//                    carro.setLocation(carro.getX()+1, carro.getY());
+//                }else{
+//                    carro.setLocation(0,590);
+//                }
+//                if(chequearColision()){
+//                    colision();
+//                }
+//                
+//                if(limo.getX()>0){
+//                    limo.setLocation(limo.getX()-1, limo.getY());
+//                }else{
+//                    limo.setLocation(650, 340);
+//                }
+//                
+//                
+//                if(chequearColision()){
+//                    colision();
+//                }
+//                
+//            }
+//        });
+//        
+//        timerAmbulancia = new Timer(4, new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                if(ambulancia.getX()<728){
+//                    ambulancia.setLocation(ambulancia.getX()+1, ambulancia.getY());
+//                }else{
+//                    ambulancia.setLocation(0, 500);
+//                }
+//                if(chequearColision()){
+//                    colision();
+//                }
+//            }
+//        });
+//        
+//        timerCamion = new Timer(7, new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                if(camion.getX()>0){
+//                    camion.setLocation(camion.getX()-1, camion.getY());
+//                }else{
+//                    camion.setLocation(650, 555);
+//                }
+//                if(chequearColision()){
+//                    colision();
+//                }
+//            }
+//        });
+//        
+//        timerCarro.start();
+//        timerAmbulancia.start();
+//        timerCamion.start();
     }
     
     public Boolean chequearColision(){
