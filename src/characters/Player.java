@@ -14,10 +14,29 @@ import java.util.ArrayList;
  */
 public class Player {
     
+    private String name;
     private int points;
     private int coins;
     private int lifes;
     private Mascot selectedMascot;
     private ArrayList<Mascot> storedMascots;
+
+    public Player(String name, int points, int coins, int lifes, Mascot selectedMascot, ArrayList<Mascot> storedMascots) {
+        this.name = name;
+        this.points = points;
+        this.coins = coins;
+        this.lifes = lifes;
+        this.selectedMascot = selectedMascot;
+        this.storedMascots = storedMascots;
+    }
+    
+    public Player(String name) {
+        this.name = name;
+        this.points = 0;
+        this.coins = 0;
+        this.lifes = 3;
+    }
+    
+    
     
 }
