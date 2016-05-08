@@ -39,18 +39,19 @@ public class CrossyRoad {
     private Timer winTimer;
     private final int INITLEVEL;
 
-    public CrossyRoad(Player player, int INITLEVEL) {
-        this.player = player;
+    public CrossyRoad(String playerName, int INITLEVEL) {
         this.INITLEVEL = INITLEVEL;
+        player = new Player(playerName);
+        mascot = new Mascot("pollo.png", 360, 700);
     }
     
     public CrossyRoad(){
         INITLEVEL = 1;
     }
     
-    public void start(String playerName){
+    public void start(){
         
-        loadLevel(INITLEVEL, playerName);
+        loadLevel(INITLEVEL);
                 
     }
     
@@ -86,7 +87,7 @@ public class CrossyRoad {
                 if(mascot.getLabel().getY()<=0){
                     mascot.getLabel().setLocation(900, 900);
                     JOptionPane.showMessageDialog(null, "NIVEL "+map.getLevel()+" SUPERADO!!");
-                    
+                    loadLevel(map.getLevel()+1);   
                 }
                 
                 Rectangle crashCoinRect;
@@ -108,23 +109,31 @@ public class CrossyRoad {
     }
     
     
-    public void loadLevel(int level, String playerName){
+    public void loadLevel(int level){
+        System.out.println("PLAYER IS: "+player.getName());
+        player.setYcloserToGoal(9999); // initialize coordinates
         
-        if(level==1){
-            player = new Player(playerName);
-            mascot = new Mascot("pollo.png", 360, 700);
+        if(level!=1){
+            destroyPreviousLevel();
         }
         
-        JFrame myFrame = new JFrame("Crossy Road 0.1");   
+        if(level==3){
+            System.exit(0);
+        }
+        
+        myFrame = new JFrame("Crossy Road 0.1");   
         myFrame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         myFrame.setLayout(null);
         myFrame.setSize(728,782);
         myFrame.setLocationRelativeTo(null); // center frame on monitor
         myFrame.setResizable(false);
+        
+        System.out.println("posicion de mascota en x:"+mascot.getLabel().getX());
+        System.out.println("posicion de mascota en y:"+mascot.getLabel().getY());
         myFrame.add(mascot.getLabel());
+        mascot.getLabel().setLocation(360, 700);
         
-        
-        map = new Map(1, "mapa.png", 0 , 0);
+        map = new Map(level, 0 , 0);
         
         for(Vehicle vehicle: map.getVehicles()){
             myFrame.add(vehicle.getLabel());
@@ -145,8 +154,7 @@ public class CrossyRoad {
                         mascot.getLabel().setLocation(mascot.getLabel().getX(), mascot.getLabel().getY()-30);
                         if(mascot.getLabel().getY()<player.getYcloserToGoal()){
                             player.setYcloserToGoal(mascot.getLabel().getY());
-                            // le quitamos a posicion inicial de la mascota entre los px por paso
-                            player.setPoints(700/30 - mascot.getLabel().getY()/30);
+                            player.increasePoints(1);
                             System.out.println("puntos acumulados:" +player.getPoints());
                         }
                         break;
@@ -167,6 +175,16 @@ public class CrossyRoad {
         createCrashListener();
         createWinLevelListener();
         
+    }
+    
+    public void destroyPreviousLevel(){
+        crashTimer.stop();
+        winTimer.stop();
+//        crashTimer=null;
+//        winTimer=null;
+//        map=null;
+        myFrame.setVisible(false);
+//        myFrame=null;
     }
     
     public static void main(String[] args) {
