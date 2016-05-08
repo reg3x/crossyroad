@@ -58,6 +58,10 @@ public class Player {
     public void setPoints(int points) {
         this.points = points;
     }
+    
+    public void increasePoints(int points){
+        this.points += points;
+    }
 
     public void setCoins(int coins) {
         this.coins = coins;
@@ -85,5 +89,9 @@ public class Player {
 
     public void setSelectedMascot(Mascot selectedMascot) {
         this.selectedMascot = selectedMascot;
+    }
+
+    public String getName() {
+        return name;
     }
 }
