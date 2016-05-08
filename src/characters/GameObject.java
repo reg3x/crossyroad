@@ -22,9 +22,8 @@ public class GameObject {
     private int xInit, yInit;
     
     public GameObject(String urlstring, int xInit, int yInit) {
-        System.out.println("got urlstring parameter: "+urlstring);
         url = this.getClass().getResource("/images/"+urlstring);
-        System.out.println("using url:"+url);
+//        System.out.println("using url:"+url);
         icon = new ImageIcon(url);
         label = new JLabel(icon);
         this.xInit = xInit;
