@@ -6,6 +6,7 @@
 package characters;
 
 import java.util.ArrayList;
+import javax.swing.JLabel;
 
 /**
  *

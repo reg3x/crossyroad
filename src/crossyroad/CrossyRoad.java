@@ -38,6 +38,12 @@ public class CrossyRoad {
     private Timer crashTimer;
     private Timer winTimer;
     private final int INITLEVEL;
+    
+    private JLabel playerNameLabel;
+    private JLabel playerLifeLabel;
+    private JLabel playerPointsLabel;
+    private JLabel playerCoinsLabel;
+    private JLabel TimeLabel;
 
     public CrossyRoad(String playerName, int INITLEVEL) {
         this.INITLEVEL = INITLEVEL;
@@ -67,6 +73,7 @@ public class CrossyRoad {
                         System.out.println("there has been a Crash! ");
                         mascot.getLabel().setLocation(360,700);
                         player.decreaseLife();
+                        playerLifeLabel.setText(Integer.toString(player.getLifes()));
                         if(player.getLifes()==0){
                             JOptionPane.showMessageDialog(null, "GAME OVER!!");
                             myFrame.setVisible(false);
@@ -97,6 +104,7 @@ public class CrossyRoad {
                     if(crashCoinRect.getWidth()>0 && crashCoinRect.getHeight()>0){
                         System.out.println("Player Got a Coin! ");
                         player.IncreaseCoins();
+                        playerCoinsLabel.setText(Integer.toString(player.getCoins()));
                         coin.getLabel().setLocation(-100,-100);
                         System.out.println("toal coins: "+player.getCoins());
                         break;
@@ -128,8 +136,26 @@ public class CrossyRoad {
         myFrame.setLocationRelativeTo(null); // center frame on monitor
         myFrame.setResizable(false);
         
-        System.out.println("posicion de mascota en x:"+mascot.getLabel().getX());
-        System.out.println("posicion de mascota en y:"+mascot.getLabel().getY());
+        playerNameLabel = new JLabel(player.getName());
+        playerNameLabel.setBounds(90,16,100,20);
+        myFrame.add(playerNameLabel);
+        
+        playerPointsLabel = new JLabel(Integer.toString(player.getPoints()));
+        playerPointsLabel.setBounds(250,16,100,20);
+        myFrame.add(playerPointsLabel);
+        
+        TimeLabel = new JLabel(Integer.toString(0));
+        TimeLabel.setBounds(410,16,100,20);
+        myFrame.add(TimeLabel);
+        
+        playerCoinsLabel = new JLabel(Integer.toString(player.getCoins()));
+        playerCoinsLabel.setBounds(550,16,100,20);
+        myFrame.add(playerCoinsLabel);
+        
+        playerLifeLabel = new JLabel(Integer.toString(player.getLifes()));
+        playerLifeLabel.setBounds(670,16,100,20);
+        myFrame.add(playerLifeLabel);
+        
         myFrame.add(mascot.getLabel());
         mascot.getLabel().setLocation(360, 700);
         
@@ -155,6 +181,7 @@ public class CrossyRoad {
                         if(mascot.getLabel().getY()<player.getYcloserToGoal()){
                             player.setYcloserToGoal(mascot.getLabel().getY());
                             player.increasePoints(1);
+                            playerPointsLabel.setText(Integer.toString(player.getPoints()));
                             System.out.println("puntos acumulados:" +player.getPoints());
                         }
                         break;
