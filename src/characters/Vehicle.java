@@ -7,6 +7,7 @@ package characters;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import javax.swing.Timer;
 
 /**
@@ -27,10 +28,19 @@ public class Vehicle extends GameObject {
     }
     
     public void startAutomaticMovement(){
+                
+        ArrayList<Integer> speeds;
+        speeds = new ArrayList<>();
+        speeds.add(2);
+        speeds.add(5);
+        speeds.add(8);
+        speeds.add(12);
+        int Min =1;
+        int Max =4;
+        int speed = Min+(int)(Math.random()*((Max-Min)+1));
         
-        //MAKE THE TIMER TIME A RANDOM NUMBER INSTEAD OF 5
         
-        timer = new Timer(5 ,new ActionListener() {
+        timer = new Timer(speeds.get(speed-1) ,new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 
