@@ -62,6 +62,10 @@ public class Player {
     public void setCoins(int coins) {
         this.coins = coins;
     }
+    
+    public void IncreaseCoins(){
+        coins++;
+    }
 
     public int getYcloserToGoal() {
         return YcloserToGoal;
@@ -82,7 +86,4 @@ public class Player {
     public void setSelectedMascot(Mascot selectedMascot) {
         this.selectedMascot = selectedMascot;
     }
-    
-    
-    
 }

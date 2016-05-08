@@ -5,6 +5,7 @@
  */
 package crossyroad;
 
+import characters.Coin;
 import characters.Map;
 import characters.Mascot;
 import characters.Player;
@@ -77,18 +78,33 @@ public class CrossyRoad {
         crashTimer.start();
     }
     
-     public void createWinLevelListener(){
-        crashTimer = new Timer(2, new ActionListener() {
+    public void createWinLevelListener(){
+        winTimer = new Timer(2, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                
                 if(mascot.getLabel().getY()<=0){
                     mascot.getLabel().setLocation(900, 900);
                     JOptionPane.showMessageDialog(null, "NIVEL "+map.getLevel()+" SUPERADO!!");
                     
                 }
+                
+                Rectangle crashCoinRect;
+                crashCoinRect = null;
+                for(Coin coin: map.getCoins()){
+                    crashCoinRect = mascot.getRectangle().intersection(coin.getRectangle());
+                    if(crashCoinRect.getWidth()>0 && crashCoinRect.getHeight()>0){
+                        System.out.println("Player Got a Coin! ");
+                        player.IncreaseCoins();
+                        coin.getLabel().setLocation(-100,-100);
+                        System.out.println("toal coins: "+player.getCoins());
+                        break;
+                    }
+                } 
+                
             }
         });
-        crashTimer.start();
+        winTimer.start();
     }
     
     
@@ -112,6 +128,10 @@ public class CrossyRoad {
         
         for(Vehicle vehicle: map.getVehicles()){
             myFrame.add(vehicle.getLabel());
+        }
+        
+        for(Coin coin: map.getCoins()){
+            myFrame.add(coin.getLabel());
         }
         
         myFrame.add(map.getLabel());

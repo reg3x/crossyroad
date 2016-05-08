@@ -17,12 +17,14 @@ public class Map extends GameObject{
     private int limitLeft, limitRight, limitUp;
     private ArrayList<Integer> YRoadsCoordinates;
     private ArrayList<Vehicle> vehicles;
+    private ArrayList<Coin> coins;
    
     public Map(int level, String urlstring, int xInit, int yInit) {
         super(urlstring, xInit, yInit);
         this.level = level;
         loadRoadsCoordinates();
         createCars();
+        createCoins();
     }
     
     public void createCars(){
@@ -42,6 +44,14 @@ public class Map extends GameObject{
             }
         }
         
+    }
+    
+    public void createCoins(){
+        coins = new ArrayList<>();
+        
+        for(int i=0;i<5;i++){
+            coins.add(new Coin("coin_01.png", i*60, i*60));
+        }
     }
     
     public void loadRoadsCoordinates(){
@@ -66,6 +76,10 @@ public class Map extends GameObject{
 
     public int getLevel() {
         return level;
+    }
+
+    public ArrayList<Coin> getCoins() {
+        return coins;
     }
    
     
