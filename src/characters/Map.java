@@ -73,11 +73,17 @@ public class Map extends GameObject{
                 break;
             
             case 2:
-                numRoads = 2;
+                numRoads = 8;
                 limitLeft = 0;
                 limitRight = 650;
-                YRoadsCoordinates.add(490);
-                YRoadsCoordinates.add(455);
+                YRoadsCoordinates.add(600+12);
+                YRoadsCoordinates.add(550+12);
+                YRoadsCoordinates.add(500+12);
+                YRoadsCoordinates.add(450+12);
+                YRoadsCoordinates.add(300+12);
+                YRoadsCoordinates.add(250+12);
+                YRoadsCoordinates.add(100+12);
+                YRoadsCoordinates.add(50+12);
         }
     }
 
