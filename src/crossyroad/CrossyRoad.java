@@ -123,6 +123,12 @@ public class CrossyRoad {
                 switch(e.getKeyCode()){
                     case KeyEvent.VK_UP:
                         mascot.getLabel().setLocation(mascot.getLabel().getX(), mascot.getLabel().getY()-30);
+                        if(mascot.getLabel().getY()<player.getYcloserToGoal()){
+                            player.setYcloserToGoal(mascot.getLabel().getY());
+                            // le quitamos a posicion inicial de la mascota entre los px por paso
+                            player.setPoints(700/30 - mascot.getLabel().getY()/30);
+                            System.out.println("puntos acumulados:" +player.getPoints());
+                        }
                         break;
                     case KeyEvent.VK_DOWN:
                         mascot.getLabel().setLocation(mascot.getLabel().getX(), mascot.getLabel().getY()+30);
@@ -134,7 +140,7 @@ public class CrossyRoad {
                         mascot.getLabel().setLocation(mascot.getLabel().getX()+30, mascot.getLabel().getY());
                         break;
                 }
-                System.out.println("Key: "+e.getKeyCode());
+                //System.out.println("Key: "+e.getKeyCode());
             }
         });
         

@@ -20,6 +20,7 @@ public class Player {
     private int lifes;
     private Mascot selectedMascot;
     private ArrayList<Mascot> storedMascots;
+    private int YcloserToGoal;
 
     public Player(String name, int points, int coins, int lifes, Mascot selectedMascot, ArrayList<Mascot> storedMascots) {
         this.name = name;
@@ -34,6 +35,7 @@ public class Player {
         this.name = name;
         this.points = 0;
         this.coins = 0;
+        this.YcloserToGoal = 99999;
         this.lifes = 3;
     }
     
@@ -59,6 +61,26 @@ public class Player {
 
     public void setCoins(int coins) {
         this.coins = coins;
+    }
+
+    public int getYcloserToGoal() {
+        return YcloserToGoal;
+    }
+
+    public void setYcloserToGoal(int YcloserToGoal) {
+        this.YcloserToGoal = YcloserToGoal;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setLifes(int lifes) {
+        this.lifes = lifes;
+    }
+
+    public void setSelectedMascot(Mascot selectedMascot) {
+        this.selectedMascot = selectedMascot;
     }
     
     
