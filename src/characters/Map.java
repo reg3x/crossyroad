@@ -19,8 +19,8 @@ public class Map extends GameObject{
     private ArrayList<Vehicle> vehicles;
     private ArrayList<Coin> coins;
    
-    public Map(int level, String urlstring, int xInit, int yInit) {
-        super(urlstring, xInit, yInit);
+    public Map(int level, int xInit, int yInit) {
+        super("mapa"+level+".png", xInit, yInit);
         this.level = level;
         loadRoadsCoordinates();
         createCars();
@@ -67,6 +67,13 @@ public class Map extends GameObject{
                 YRoadsCoordinates.add(500);
                 YRoadsCoordinates.add(340);
                 break;
+            
+            case 2:
+                numRoads = 2;
+                limitLeft = 0;
+                limitRight = 650;
+                YRoadsCoordinates.add(490);
+                YRoadsCoordinates.add(455);
         }
     }
 
