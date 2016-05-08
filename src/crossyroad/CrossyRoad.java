@@ -48,9 +48,9 @@ public class CrossyRoad {
         INITLEVEL = 1;
     }
     
-    public void start(){
+    public void start(String playerName){
         
-        loadLevel(INITLEVEL);
+        loadLevel(INITLEVEL, playerName);
                 
     }
     
@@ -108,10 +108,10 @@ public class CrossyRoad {
     }
     
     
-    public void loadLevel(int level){
+    public void loadLevel(int level, String playerName){
         
         if(level==1){
-            player = new Player("Diego");
+            player = new Player(playerName);
             mascot = new Mascot("pollo.png", 360, 700);
         }
         

@@ -12,6 +12,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JTextField;
 
 /**
  *
@@ -19,14 +20,18 @@ import javax.swing.JLabel;
  */
 public class Menu {
     private JFrame menuFrame;
-    private JFrame creditsFrame;
     private JLabel logoLabel;
     private ImageIcon logoIcon;
     private URL logoUrl;
     
+    private JFrame creditsFrame;
     private JLabel creditsLabel;
     private ImageIcon creditsIcon;
     private URL creditsUrl;
+    
+    private JFrame playerFrame;
+    private JLabel nameLabel;
+    private JTextField nameField;
 
     public Menu() {
         menuFrame = new JFrame("CrossyRoad - Menu");
@@ -63,6 +68,46 @@ public class Menu {
         menuFrame.add(saveGameBtn);
         menuFrame.add(creditsBtn);
         
+        playerFrame = new JFrame("Jugador");
+        playerFrame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+        playerFrame.setLayout(null);
+        playerFrame.setSize(300,200);
+        playerFrame.setLocationRelativeTo(null); // center frame on monitor
+        playerFrame.setResizable(false);
+        
+        nameLabel = new JLabel("Inserte su Nombre:");
+        nameLabel.setBounds(80,30,140,10);
+        nameField = new JTextField();
+        nameField.setBounds(80,50,140,30);
+        
+        JButton acceptNameBtn = new JButton("Aceptar");
+        acceptNameBtn.setSize(120, 30);
+        acceptNameBtn.setLocation(20, 100);
+        
+        JButton cancelNameBtn = new JButton("Cancelar");
+        cancelNameBtn.setSize(120, 30);
+        cancelNameBtn.setLocation(160, 100);
+        
+        playerFrame.add(nameLabel);
+        playerFrame.add(nameField);
+        playerFrame.add(acceptNameBtn);
+        playerFrame.add(cancelNameBtn);
+        
+        cancelNameBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                playerFrame.setVisible(false);
+            }
+        });
+        
+        acceptNameBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+               CrossyRoad myGame = new CrossyRoad();
+               myGame.start(nameField.getText());
+               playerFrame.setVisible(false);
+            }
+        });
         
         creditsFrame = new JFrame("Creditos");
         creditsFrame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
@@ -89,8 +134,7 @@ public class Menu {
         newGameBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-               CrossyRoad myGame = new CrossyRoad();
-               myGame.start();
+               playerFrame.setVisible(true);
             }
         });
         
