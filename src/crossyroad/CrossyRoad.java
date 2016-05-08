@@ -42,7 +42,7 @@ public class CrossyRoad {
     public CrossyRoad(String playerName, int INITLEVEL) {
         this.INITLEVEL = INITLEVEL;
         player = new Player(playerName);
-        mascot = new Mascot("pollo.png", 360, 700);
+        mascot = new Mascot("goku_up.png", 360, 700);
     }
     
     public CrossyRoad(){
@@ -151,7 +151,7 @@ public class CrossyRoad {
                 
                 switch(e.getKeyCode()){
                     case KeyEvent.VK_UP:
-                        mascot.getLabel().setLocation(mascot.getLabel().getX(), mascot.getLabel().getY()-30);
+                        mascot.getLabel().setLocation(mascot.getLabel().getX(), mascot.getLabel().getY()-50);
                         if(mascot.getLabel().getY()<player.getYcloserToGoal()){
                             player.setYcloserToGoal(mascot.getLabel().getY());
                             player.increasePoints(1);
@@ -159,13 +159,13 @@ public class CrossyRoad {
                         }
                         break;
                     case KeyEvent.VK_DOWN:
-                        mascot.getLabel().setLocation(mascot.getLabel().getX(), mascot.getLabel().getY()+30);
+                        mascot.getLabel().setLocation(mascot.getLabel().getX(), mascot.getLabel().getY()+50);
                         break;
                     case KeyEvent.VK_LEFT:
-                        mascot.getLabel().setLocation(mascot.getLabel().getX()-30, mascot.getLabel().getY());
+                        mascot.getLabel().setLocation(mascot.getLabel().getX()-50, mascot.getLabel().getY());
                         break;
                     case KeyEvent.VK_RIGHT:
-                        mascot.getLabel().setLocation(mascot.getLabel().getX()+30, mascot.getLabel().getY());
+                        mascot.getLabel().setLocation(mascot.getLabel().getX()+50, mascot.getLabel().getY());
                         break;
                 }
                 //System.out.println("Key: "+e.getKeyCode());

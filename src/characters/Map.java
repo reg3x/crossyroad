@@ -50,7 +50,7 @@ public class Map extends GameObject{
         coins = new ArrayList<>();
         
         for(int i=0;i<5;i++){
-            coins.add(new Coin("coin_01.png", i*60, i*60));
+            coins.add(new Coin("coin.png", i*60, i*60));
         }
     }
     
@@ -58,14 +58,18 @@ public class Map extends GameObject{
         YRoadsCoordinates = new ArrayList<>();
         switch(level){
             case 1:
-                numRoads=4;
+                numRoads=8;
                 limitLeft = 0;
                 limitRight = 650;
                 // TODO: SET LIMIT UP FOR WINNING
-                YRoadsCoordinates.add(590);
-                YRoadsCoordinates.add(555);
-                YRoadsCoordinates.add(500);
-                YRoadsCoordinates.add(340);
+                YRoadsCoordinates.add(600+12);
+                YRoadsCoordinates.add(550+12);
+                YRoadsCoordinates.add(500+12);
+                YRoadsCoordinates.add(450+12);
+                YRoadsCoordinates.add(300+12);
+                YRoadsCoordinates.add(250+12);
+                YRoadsCoordinates.add(200+12);
+                YRoadsCoordinates.add(150+12);
                 break;
             
             case 2:
