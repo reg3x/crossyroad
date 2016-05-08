@@ -103,8 +103,8 @@ public class Menu {
         acceptNameBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-               CrossyRoad myGame = new CrossyRoad();
-               myGame.start(nameField.getText());
+               CrossyRoad myGame = new CrossyRoad(nameField.getText(), 1);
+               myGame.start();
                playerFrame.setVisible(false);
             }
         });
