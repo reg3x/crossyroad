@@ -29,22 +29,21 @@ public class Map extends GameObject{
     }
     
     public void createCars(){
-//        vehicles.add(new Vehicle("carro.png",0, 590));
-//        vehicles.add(new Vehicle("camion.png",650, 555));
-//        vehicles.add(new Vehicle("ambulancia.png",0, 500));
-//        vehicles.add(new Vehicle("limo.png",650, 340));
+        vehicles = new ArrayList<Vehicle>();
         
         // load cars evenly comming from left and right
-        vehicles = new ArrayList<Vehicle>();
         for(int i=0;i<numRoads;i++){
+            int Min =1;
+            int Max =6;
+            int carNum = Min+(int)(Math.random()*((Max-Min)+1));
+
             if((i%2)==0){
-                vehicles.add(new Vehicle("carro.png", "MoveLeft",limitRight, YRoadsCoordinates.get(i), limitLeft));
+                vehicles.add(new Vehicle("car"+carNum+"left.png", "MoveLeft",limitRight, YRoadsCoordinates.get(i), limitLeft));
             }
             else{
-                vehicles.add(new Vehicle("carro.png", "MoveRight",limitLeft, YRoadsCoordinates.get(i), limitRight));
+                vehicles.add(new Vehicle("car"+carNum+".png", "MoveRight",limitLeft, YRoadsCoordinates.get(i), limitRight));
             }
-        }
-        
+        }   
     }
     
     public void createCoins(){
