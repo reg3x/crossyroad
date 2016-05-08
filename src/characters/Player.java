@@ -37,6 +37,30 @@ public class Player {
         this.lifes = 3;
     }
     
+    public void decreaseLife(){
+        lifes--;
+    }
+
+    public int getPoints() {
+        return points;
+    }
+
+    public int getCoins() {
+        return coins;
+    }
+
+    public int getLifes() {
+        return lifes;
+    }
+
+    public void setPoints(int points) {
+        this.points = points;
+    }
+
+    public void setCoins(int coins) {
+        this.coins = coins;
+    }
+    
     
     
 }
