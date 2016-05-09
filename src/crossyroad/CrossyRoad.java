@@ -44,11 +44,15 @@ public class CrossyRoad {
     private JLabel playerPointsLabel;
     private JLabel playerCoinsLabel;
     private JLabel TimeLabel;
+    
+    private double startTime;
+    private double endTime;
+    private int timeSec;
 
     public CrossyRoad(String playerName, int INITLEVEL) {
         this.INITLEVEL = INITLEVEL;
         player = new Player(playerName);
-        mascot = new Mascot("goku_up.png", 360, 700);
+        mascot = new Mascot("goku_up.png", "goku_down.png","goku_left.png", "goku_right.png" ,360, 700);
     }
     
     public CrossyRoad(){
@@ -110,6 +114,13 @@ public class CrossyRoad {
                         break;
                     }
                 } 
+                
+                
+                endTime = System.currentTimeMillis();
+                System.out.println("startTime:"+startTime);
+                System.out.println("endTime:"+endTime);
+                timeSec = (int)((endTime-startTime)/1000);
+                TimeLabel.setText(Integer.toString(timeSec));
                 
             }
         });
@@ -177,6 +188,7 @@ public class CrossyRoad {
                 
                 switch(e.getKeyCode()){
                     case KeyEvent.VK_UP:
+                        mascot.getLabel().setIcon(mascot.getUpIcon());
                         mascot.getLabel().setLocation(mascot.getLabel().getX(), mascot.getLabel().getY()-50);
                         if(mascot.getLabel().getY()<player.getYcloserToGoal()){
                             player.setYcloserToGoal(mascot.getLabel().getY());
@@ -186,12 +198,15 @@ public class CrossyRoad {
                         }
                         break;
                     case KeyEvent.VK_DOWN:
+                        mascot.getLabel().setIcon(mascot.getDownIcon());
                         mascot.getLabel().setLocation(mascot.getLabel().getX(), mascot.getLabel().getY()+50);
                         break;
                     case KeyEvent.VK_LEFT:
+                        mascot.getLabel().setIcon(mascot.getLeftIcon());
                         mascot.getLabel().setLocation(mascot.getLabel().getX()-50, mascot.getLabel().getY());
                         break;
                     case KeyEvent.VK_RIGHT:
+                        mascot.getLabel().setIcon(mascot.getRightIcon());
                         mascot.getLabel().setLocation(mascot.getLabel().getX()+50, mascot.getLabel().getY());
                         break;
                 }
@@ -200,6 +215,7 @@ public class CrossyRoad {
         });
         
         createCrashListener();
+        startTime = System.currentTimeMillis();
         createWinLevelListener();
         
     }
