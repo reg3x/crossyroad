@@ -1,7 +1,7 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * CrossyRoad 0.1 Licencia GPL
+ * Autor: Diego Aguilera
+ * Email: diegoaguilera85@gmail.com
  */
 package characters;
 
@@ -11,7 +11,8 @@ import java.util.ArrayList;
 import javax.swing.Timer;
 
 /**
- *
+ * Esta clase describe los vehiculos y les da los metodos y atributos necesarios
+ * para garantizar su movimiento automatizado.
  * @author reg3x
  */
 public class Vehicle extends GameObject {
@@ -19,7 +20,14 @@ public class Vehicle extends GameObject {
     Timer timer;
     int xlimit;
     
-
+    /**
+     *
+     * @param urlstring direccion de la imagen
+     * @param movementDirection direccion del movimiento
+     * @param xInit coordenada x inicial
+     * @param yInit coordenada y inicial 
+     * @param xlimit coordenada x limite del movimiento
+     */
     public Vehicle(String urlstring, String movementDirection , int xInit, int yInit, int xlimit) {
         super(urlstring, xInit, yInit);
         this.movementDirection = movementDirection;
@@ -27,6 +35,9 @@ public class Vehicle extends GameObject {
         startAutomaticMovement();
     }
     
+    /**
+     *
+     */
     public void startAutomaticMovement(){
                 
         ArrayList<Integer> speeds;

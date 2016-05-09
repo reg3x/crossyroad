@@ -1,7 +1,7 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * CrossyRoad 0.1 Licencia GPL
+ * Autor: Diego Aguilera
+ * Email: diegoaguilera85@gmail.com
  */
 package crossyroad;
 
@@ -10,6 +10,8 @@ import characters.Map;
 import characters.Mascot;
 import characters.Player;
 import characters.Vehicle;
+import java.applet.Applet;
+import java.applet.AudioClip;
 import java.awt.Color;
 import java.awt.Image;
 import java.awt.Rectangle;
@@ -17,7 +19,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.File;
 import java.util.ArrayList;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -26,7 +34,8 @@ import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 
 /**
- *
+ * Clase principal del Juego Crossy Road, desde esta clase se crea el frame principal
+ * y los diferentes listeners para los eventos que sucederan a lo largo del juego.
  * @author reg3x
  */
 public class CrossyRoad {
@@ -49,22 +58,56 @@ public class CrossyRoad {
     private double endTime;
     private int timeSec;
 
+    /**
+     *
+     * @param playerName nombre del jugador
+     * @param INITLEVEL  nivel inicial del juego
+     */
     public CrossyRoad(String playerName, int INITLEVEL) {
         this.INITLEVEL = INITLEVEL;
         player = new Player(playerName);
         mascot = new Mascot("goku_up.png", "goku_down.png","goku_left.png", "goku_right.png" ,360, 700);
     }
     
+    /**
+     *
+     */
     public CrossyRoad(){
         INITLEVEL = 1;
     }
     
+    /**
+     *
+     */
     public void start(){
-        
-        loadLevel(INITLEVEL);
-                
+        playSound("background.wav");
+        loadLevel(INITLEVEL);        
+
     }
     
+    /**
+     *
+     * @param url direccion del archivo de sonido
+     */
+    public  synchronized void playSound(final String url) {
+        new Thread(new Runnable() {
+          public void run() {
+            try {
+              Clip clip = AudioSystem.getClip();
+              AudioInputStream inputStream = AudioSystem.getAudioInputStream(
+                this.getClass().getResourceAsStream("/sounds/" + url));
+              clip.open(inputStream);
+              clip.start(); 
+            } catch (Exception e) {
+              System.err.println(e.getMessage());
+            }
+          }
+        }).start();
+      }
+
+    /**
+     *
+     */
     public void createCrashListener(){
         crashTimer = new Timer(2, new ActionListener() {
             @Override
@@ -74,6 +117,7 @@ public class CrossyRoad {
                 for(Vehicle vehicle: map.getVehicles()){
                     crashRect = mascot.getRectangle().intersection(vehicle.getRectangle());
                     if(crashRect.getWidth()>0 && crashRect.getHeight()>0){
+                        playSound("crash.wav");
                         System.out.println("there has been a Crash! ");
                         mascot.getLabel().setLocation(360,700);
                         player.decreaseLife();
@@ -84,12 +128,30 @@ public class CrossyRoad {
                         }
                         break;
                     }
-                } 
+                }
+                if(map.getLevel()==4){
+                    Rectangle crashRectTrain;
+                    crashRectTrain = null;
+                    crashRectTrain = map.getTrain().getRectangle().intersection(mascot.getRectangle());
+                    if(crashRectTrain.getWidth()>0 && crashRectTrain.getHeight()>0){
+                        playSound("crash.wav");
+                        mascot.getLabel().setLocation(360,700);
+                        player.decreaseLife();
+                        playerLifeLabel.setText(Integer.toString(player.getLifes()));
+                        if(player.getLifes()==0){
+                            JOptionPane.showMessageDialog(null, "GAME OVER!!");
+                            myFrame.setVisible(false);
+                        }
+                    }
+                }
             }
         });
         crashTimer.start();
     }
     
+    /**
+     *
+     */
     public void createWinLevelListener(){
         winTimer = new Timer(2, new ActionListener() {
             @Override
@@ -98,7 +160,12 @@ public class CrossyRoad {
                 if(mascot.getLabel().getY()<=0){
                     mascot.getLabel().setLocation(900, 900);
                     JOptionPane.showMessageDialog(null, "NIVEL "+map.getLevel()+" SUPERADO!!");
-                    loadLevel(map.getLevel()+1);   
+                    if(map.getLevel()==4){
+                        JOptionPane.showMessageDialog(null, "USTED HA GANADO EL JUEGO!! FELICITACIONES");
+                        myFrame.setVisible(false);
+                    }else{
+                        loadLevel(map.getLevel()+1); 
+                    } 
                 }
                 
                 Rectangle crashCoinRect;
@@ -106,6 +173,7 @@ public class CrossyRoad {
                 for(Coin coin: map.getCoins()){
                     crashCoinRect = mascot.getRectangle().intersection(coin.getRectangle());
                     if(crashCoinRect.getWidth()>0 && crashCoinRect.getHeight()>0){
+                        playSound("coin.wav");
                         System.out.println("Player Got a Coin! ");
                         player.IncreaseCoins();
                         playerCoinsLabel.setText(Integer.toString(player.getCoins()));
@@ -127,8 +195,12 @@ public class CrossyRoad {
         winTimer.start();
     }
     
-    
+    /**
+     *
+     * @param level nivel del juego
+     */
     public void loadLevel(int level){
+        
         System.out.println("PLAYER IS: "+player.getName());
         player.setYcloserToGoal(9999); // initialize coordinates
         
@@ -136,14 +208,10 @@ public class CrossyRoad {
             destroyPreviousLevel();
         }
         
-        if(level==3){
-            System.exit(0);
-        }
-        
         myFrame = new JFrame("Crossy Road 0.1");   
         myFrame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         myFrame.setLayout(null);
-        myFrame.setSize(728,782);
+        myFrame.setSize(725,782);
         myFrame.setLocationRelativeTo(null); // center frame on monitor
         myFrame.setResizable(false);
         
@@ -176,6 +244,10 @@ public class CrossyRoad {
             myFrame.add(vehicle.getLabel());
         }
         
+        if(level==4){   
+            myFrame.add(map.getTrain().getLabel());
+        }
+        
         for(Coin coin: map.getCoins()){
             myFrame.add(coin.getLabel());
         }
@@ -195,19 +267,30 @@ public class CrossyRoad {
                             player.increasePoints(1);
                             playerPointsLabel.setText(Integer.toString(player.getPoints()));
                             System.out.println("puntos acumulados:" +player.getPoints());
+                            
+                            if(player.getPoints()==50){
+                                playSound("50pts.wav");
+                            }
+                            
                         }
                         break;
                     case KeyEvent.VK_DOWN:
-                        mascot.getLabel().setIcon(mascot.getDownIcon());
-                        mascot.getLabel().setLocation(mascot.getLabel().getX(), mascot.getLabel().getY()+50);
+                        if(mascot.getLabel().getY()<=650){
+                            mascot.getLabel().setIcon(mascot.getDownIcon());
+                            mascot.getLabel().setLocation(mascot.getLabel().getX(), mascot.getLabel().getY()+50);
+                        }
                         break;
                     case KeyEvent.VK_LEFT:
-                        mascot.getLabel().setIcon(mascot.getLeftIcon());
-                        mascot.getLabel().setLocation(mascot.getLabel().getX()-50, mascot.getLabel().getY());
+                        if(mascot.getLabel().getX()>=50){
+                            mascot.getLabel().setIcon(mascot.getLeftIcon());
+                            mascot.getLabel().setLocation(mascot.getLabel().getX()-50, mascot.getLabel().getY());
+                        }
                         break;
                     case KeyEvent.VK_RIGHT:
-                        mascot.getLabel().setIcon(mascot.getRightIcon());
-                        mascot.getLabel().setLocation(mascot.getLabel().getX()+50, mascot.getLabel().getY());
+                        if(mascot.getLabel().getX()<=650){
+                            mascot.getLabel().setIcon(mascot.getRightIcon());
+                            mascot.getLabel().setLocation(mascot.getLabel().getX()+50, mascot.getLabel().getY());
+                        }
                         break;
                 }
                 //System.out.println("Key: "+e.getKeyCode());
@@ -224,16 +307,23 @@ public class CrossyRoad {
         
     }
     
+    /**
+     *
+     */
     public void destroyPreviousLevel(){
         crashTimer.stop();
         winTimer.stop();
-//        crashTimer=null;
-//        winTimer=null;
-//        map=null;
+        crashTimer=null;
+        winTimer=null;
+        map=null;
         myFrame.setVisible(false);
-//        myFrame=null;
+        myFrame=null;
     }
     
+    /**
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         System.out.println("INICIANDO CROSSY ROAD");
         Menu menu = new Menu();

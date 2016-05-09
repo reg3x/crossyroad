@@ -1,7 +1,7 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * CrossyRoad 0.1 Licencia GPL
+ * Autor: Diego Aguilera
+ * Email: diegoaguilera85@gmail.com
  */
 package crossyroad;
 
@@ -15,7 +15,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 /**
- *
+ * Esta clase describe el menu principal del juego.
  * @author reg3x
  */
 public class Menu {
@@ -33,6 +33,9 @@ public class Menu {
     private JLabel nameLabel;
     private JTextField nameField;
 
+    /**
+     * Constructor por defecto de la clase Menu.
+     */
     public Menu() {
         menuFrame = new JFrame("CrossyRoad - Menu");
         menuFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -58,15 +61,20 @@ public class Menu {
         saveGameBtn.setSize(150, 50);
         saveGameBtn.setLocation(280, 520);
         
+        JButton exitGameBtn = new JButton("Salir");
+        exitGameBtn.setSize(150, 50);
+        exitGameBtn.setLocation(280, 480);
+        
         JButton creditsBtn = new JButton("Creditos");
         creditsBtn.setSize(150, 30);
-        creditsBtn.setLocation(280, 620);
+        creditsBtn.setLocation(280, 570);
         
         menuFrame.add(logoLabel);
         menuFrame.add(newGameBtn);
-        menuFrame.add(loadGameBtn);
-        menuFrame.add(saveGameBtn);
+//        menuFrame.add(loadGameBtn);
+//        menuFrame.add(saveGameBtn);
         menuFrame.add(creditsBtn);
+        menuFrame.add(exitGameBtn);
         
         playerFrame = new JFrame("Jugador");
         playerFrame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
@@ -138,12 +146,25 @@ public class Menu {
             }
         });
         
+        exitGameBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);
+            }
+        });
+        
     }
     
+    /**
+     * Muestra el Menu.
+     */
     public void show(){
         menuFrame.setVisible(true);
     }
     
+    /**
+     * Esconde el Menu.
+     */
     public void hide(){
         menuFrame.setVisible(false);
     }

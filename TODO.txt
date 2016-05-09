@@ -6,17 +6,26 @@ rocas
 autos
 trenes
 
-- al iniciarse el juego se debe solicitar el nombre del jugador
-- se debe mostrar el nombre del jugador en la pantalla del juego
-- se deben mostrar: el tiempo, las monedas y su puntuación
-- el juego debe contar con sonidos 
-- deben existir rios  que se puede cruzar con troncos
+
+
 - un águila vendrá por ti si duras mas de 10 segundos
-- cada cuadrante que se suba suma 1 punto
-- cada 50 puntos debe activarse un sonido
-- deben haber monedas amarillas 
+- deben existir rios  que se puede cruzar con troncos
 - se deben poder comprar mascotas , cada mascota cuesta 50 puntos
-- debe existir un contador con el tiempo transcurrido en cada partida
 - deben haber al menos 2 mascotas
 - se debe mostrar una galería con los 10 mejores records 
 - el jugador puede guardar la partida para continuarla luego
+
+
+
+
+
+mapa 3
+
+600
+550
+500
+450
+400
+350
+100
+50
