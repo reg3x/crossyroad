@@ -1,6 +1,7 @@
 /*
  * CrossyRoad 0.1 Licencia GPL
  * Autor: Diego Aguilera
+ * Repositorio: https://github.com/reg3x/crossyroad
  * Email: diegoaguilera85@gmail.com
  */
 package crossyroad;
