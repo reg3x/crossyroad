@@ -215,7 +215,11 @@ public class CrossyRoad {
         });
         
         createCrashListener();
-        startTime = System.currentTimeMillis();
+        
+        if(level==1){
+            startTime = System.currentTimeMillis();
+        }
+        
         createWinLevelListener();
         
     }
